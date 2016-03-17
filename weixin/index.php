@@ -13,11 +13,14 @@ $weObj = new Wechat($options);
 $type = $weObj->getRev()->getRevType();
 //$reb  = $weObj-
 
+$wecha_id = $weObj->getRevFrom();
+//关键字
 $keywords = $weObj->getRevContent();
 switch($type) {
     case Wechat::MSGTYPE_TEXT:   //文字类型
 
             switch ($keywords) {
+
                 case '我的课程':
                      $arrayName = array(
                         "0"=>array(
@@ -34,6 +37,7 @@ switch($type) {
                                 ),
                 );
                 $weObj->news($arrayName)->reply();
+
                     break;
                 case '我的积分':
                     $arrayName = array(
@@ -51,6 +55,10 @@ switch($type) {
                                 ),
                 );
                 $weObj->news($arrayName)->reply();
+                    break;
+                case '你的':
+                    $weObj->text($weObj->getRevFrom())->reply();
+                    //$weObj->text($weObj->getRevCtime())->reply();
                     break;
                 default:
                     $weObj->text("help info")->reply();
@@ -71,9 +79,13 @@ switch($type) {
 
 
 //我的课程
-//积分
 
 
+function getMyOrder()
+{
+
+}
+//我的积分
 
 
 
